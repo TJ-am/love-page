@@ -6,135 +6,98 @@
   <title>You + I | Tina Jia</title>
   <style>
     * { box-sizing: border-box; }
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       background: #000;
-      overflow-x: hidden;
+      overflow: hidden;
       color: #fff;
       font-family: 'Georgia', serif;
+      scroll-behavior: smooth;
     }
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      animation: fall linear infinite;
+    section {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
     }
-    @keyframes fall {
-      0% { transform: translateY(-10px); opacity: 0; }
-      100% { transform: translateY(110vh); opacity: 1; }
+    .intro {
+      background: black;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      animation: fadeout 3s ease 3s forwards;
     }
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 3s ease-in-out forwards;
+    @keyframes fadeout {
+      to { opacity: 0; visibility: hidden; }
     }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    .heartbeat {
-      animation: heartbeat 2s ease-in-out infinite;
-    }
+    .heartbeat { animation: heartbeat 1.5s infinite; }
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.1); }
     }
-    .container {
-      text-align: center;
-      padding: 60px 20px 30px;
-    }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 1em;
-    }
-    p {
-      max-width: 600px;
-      margin: 0 auto 2em;
-      line-height: 1.8;
-      white-space: pre-wrap;
-    }
-    .notes {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .note {
-      cursor: pointer;
-      padding: 10px 20px;
-      border: 1px solid #fff;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.1);
-      transition: 0.3s;
-    }
-    .note:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    .message-box {
-      margin-top: 20px;
-      font-style: italic;
-      font-size: 1.1em;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      padding: 20px;
-    }
+    .note { cursor: pointer; font-size: 2em; margin: 10px; }
+    .message-box { margin-top: 20px; font-style: italic; text-align: center; }
+    .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
     .gallery img {
-      width: 100%;
+      width: 200px;
+      height: auto;
       border-radius: 10px;
       cursor: pointer;
       transition: transform 0.3s;
     }
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
-    .diary {
-      max-width: 700px;
-      margin: 50px auto;
-      padding: 20px;
-      border-top: 1px solid #fff;
-    }
+    .gallery img:hover { transform: scale(1.05); }
     .diary textarea {
-      width: 100%;
+      width: 80vw;
       height: 200px;
       padding: 10px;
-      font-family: 'Georgia', serif;
       font-size: 1em;
       background: #111;
       color: #fff;
       border: 1px solid #888;
       border-radius: 5px;
+      font-family: Georgia, serif;
     }
-    #audioTrigger {
+    #lightbox {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background: rgba(0,0,0,0.9);
-      color: white;
-      font-size: 1.5em;
-      z-index: 9999;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      cursor: pointer;
+      z-index: 10000;
+    }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+    .link-button {
+      margin-top: 20px;
+      color: #0af;
+      font-size: 1.2em;
     }
   </style>
 </head>
 <body>
-  <div id="audioTrigger">🔊 Tap Anywhere to Begin with Tina's Song</div>
-  <audio id="loveSong" loop>
-    <source src="love_audio.wav" type="audio/wav" />
-  </audio>
+<div class="intro heartbeat">❤️ Tina Jia ❤️</div>
+<audio id="bgm" loop>
+  <source src="love_audio.wav" type="audio/wav" />
+</audio>
 
-  <div class="container fade-in heartbeat">
-    <h1>I ensure</h1>
-    <p>
+<section style="background:black;">
+  <h1>I ensure</h1>
+  <p style="max-width:600px;white-space:pre-wrap;text-align:center;">
 Love is a ghost
 Not bound by flesh, nor time
 Yet it lingers in the spaces between breaths
@@ -152,73 +115,80 @@ Let me wear your name like a second skin
 And speak mine as if it belongs to you
 Return (You + I).toUs() and 
 Call(me, by=your_name)
-    </p>
-    <div class="notes">
-      <div class="note" onclick="reveal(0)">🎵</div>
-      <div class="note" onclick="reveal(1)">🎵</div>
-      <div class="note" onclick="reveal(2)">🎵</div>
-      <div class="note" onclick="reveal(3)">🎵</div>
-      <div class="note" onclick="reveal(4)">🎵</div>
-      <div class="note" onclick="reveal(5)">🎵</div>
-      <div class="note" onclick="reveal(6)">🎵</div>
-      <div class="note" onclick="reveal(7)">🎵</div>
-      <div class="note" onclick="reveal(8)">🎵</div>
-      <div class="note" onclick="reveal(9)">🎵</div>
-    </div>
-    <div class="message-box" id="message"></div>
-  </div>
+  </p>
+</section>
 
+<section style="background:#111;">
+  <h2>💌 Notes from the Stars</h2>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;">
+    <div class="note" onclick="reveal(0)">🎵</div>
+    <div class="note" onclick="reveal(1)">🎵</div>
+    <div class="note" onclick="reveal(2)">🎵</div>
+    <div class="note" onclick="reveal(3)">🎵</div>
+    <div class="note" onclick="reveal(4)">🎵</div>
+    <div class="note" onclick="reveal(5)">🎵</div>
+    <div class="note" onclick="reveal(6)">🎵</div>
+    <div class="note" onclick="reveal(7)">🎵</div>
+    <div class="note" onclick="reveal(8)">🎵</div>
+    <div class="note" onclick="reveal(9)">🎵</div>
+  </div>
+  <div class="message-box" id="message"></div>
+</section>
+
+<section style="background:#222;">
+  <h2>📸 Our Moments</h2>
   <div class="gallery">
-    <img src="your_photo1.jpg" alt="photo1">
-    <img src="your_photo2.jpg" alt="photo2">
-    <img src="your_photo3.jpg" alt="photo3">
+    <img src="livePhoto_1742203579439495.JPG" alt="photo1">
+    <img src="livePhoto_1742203544865392.JPG" alt="photo2">
+    <img src="IMG_1709.HEIC" alt="photo3">
   </div>
+  <a href="more_photos.html" class="link-button">👉 See More</a>
+</section>
 
+<section style="background:#000;">
+  <h2>📝 My Diary for Tina Jia</h2>
   <div class="diary">
-    <h2>💌 My Diary for Tina Jia</h2>
-    <textarea id="diaryText" placeholder="Write your heart here..."></textarea>
+    <textarea id="diaryText" placeholder="Write what your heart says..."></textarea>
   </div>
+</section>
 
-  <script>
-    const messages = [
-      "You are beautiful, but your heart is more beautiful still.",
-      "I look at you, and I see all the stars I ever wished upon.",
-      "If you come at four in the afternoon, I’ll begin to be happy by three.",
-      "You become responsible, forever, for what you have tamed.",
-      "The most beautiful things in the world cannot be seen or touched, they are felt with the heart.",
-      "It is the time you have wasted for your rose that makes your rose so important.",
-      "You are my rose, and I will keep you under glass forever.",
-      "Sometimes, I wonder if the stars are laughing in happiness with me.",
-      "I closed my eyes to see you better.",
-      "You are the voice my heart always wanted to hear."
-    ];
-    function reveal(index) {
-      document.getElementById("message").innerText = messages[index];
-    }
+<div id="lightbox" onclick="this.style.display='none'"><img src=""></div>
 
-    // Starfall background
-    for (let i = 0; i < 80; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.left = Math.random() * 100 + "vw";
-      star.style.animationDuration = 3 + Math.random() * 5 + "s";
-      document.body.appendChild(star);
-    }
+<script>
+const audio = document.getElementById("bgm");
+window.addEventListener("click", () => {
+  audio.play();
+}, { once: true });
 
-    // Music autoplay after user interaction
-    const audio = document.getElementById("loveSong");
-    const trigger = document.getElementById("audioTrigger");
-    trigger.addEventListener("click", () => {
-      audio.play();
-      trigger.style.display = "none";
-    });
+const messages = [
+  "You are beautiful, but your heart is more beautiful still.",
+  "I look at you, and I see all the stars I ever wished upon.",
+  "If you come at four in the afternoon, I’ll begin to be happy by three.",
+  "You become responsible, forever, for what you have tamed.",
+  "The most beautiful things in the world cannot be seen or touched, they are felt with the heart.",
+  "It is the time you have wasted for your rose that makes your rose so important.",
+  "You are my rose, and I will keep you under glass forever.",
+  "Sometimes, I wonder if the stars are laughing in happiness with me.",
+  "I closed my eyes to see you better.",
+  "You are the voice my heart always wanted to hear."
+];
+function reveal(i) {
+  document.getElementById("message").innerText = messages[i];
+}
 
-    // Diary local save
-    const diary = document.getElementById("diaryText");
-    diary.value = localStorage.getItem("tinaDiary") || "";
-    diary.addEventListener("input", () => {
-      localStorage.setItem("tinaDiary", diary.value);
-    });
-  </script>
+document.querySelectorAll(".gallery img").forEach(img => {
+  img.addEventListener("click", () => {
+    const lightbox = document.getElementById("lightbox");
+    lightbox.style.display = "flex";
+    lightbox.querySelector("img").src = img.src;
+  });
+});
+
+const diary = document.getElementById("diaryText");
+diary.value = localStorage.getItem("tinaDiary") || "";
+diary.addEventListener("input", () => {
+  localStorage.setItem("tinaDiary", diary.value);
+});
+</script>
 </body>
 </html>
