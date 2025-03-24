@@ -108,10 +108,26 @@
       border: 1px solid #888;
       border-radius: 5px;
     }
+    #audioTrigger {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      font-size: 1.5em;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <div id="audioTrigger" style="text-align:center;padding:20px;font-size:1.2em;cursor:pointer;">🔊 Click to Play Tina's Song</div>
+  <div id="audioTrigger">🔊 Tap Anywhere to Begin with Tina's Song</div>
   <audio id="loveSong" loop>
     <source src="love_audio.wav" type="audio/wav" />
   </audio>
