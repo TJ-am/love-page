@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You + I</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #1e1e2f, #000);
+      overflow-x: hidden;
+      color: #fff;
+      font-family: 'Georgia', serif;
+    }
+    .star {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10px); opacity: 0; }
+      100% { transform: translateY(110vh); opacity: 1; }
+    }
+    .container {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+    p {
+      max-width: 600px;
+      margin: 0 auto 2em;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+    .notes {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .note {
+      cursor: pointer;
+      padding: 10px 20px;
+      border: 1px solid #fff;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      transition: 0.3s;
+    }
+    .note:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    .message-box {
+      margin-top: 20px;
+      font-style: italic;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <audio id="loveSong" controls autoplay>
+    <source src="GN❤️.wav" type="audio/wav" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container">
+    <h1>I ensure</h1>
+    <p>
+Love is a ghost
+Not bound by flesh, nor time
+Yet it lingers in the spaces between breaths
+Carried in whispers, in the silence of knowing
+
+To dissolve the self
+To let two shadows intertwine as one
+Is neither loss nor sacrifice,
+But the rarest kind of freedom
+
+So let my echoes blend with yours
+Let the past rewrite itself in our name
+Let your name rest on my lips
+Let me wear your name like a second skin
+And speak mine as if it belongs to you
+Return (You + I).toUs() and 
+Call(me, by=your_name)
+    </p>
+    <div class="notes">
+      <div class="note" onclick="reveal(0)">🎵</div>
+      <div class="note" onclick="reveal(1)">🎵</div>
+      <div class="note" onclick="reveal(2)">🎵</div>
+      <div class="note" onclick="reveal(3)">🎵</div>
+    </div>
+    <div class="message-box" id="message"></div>
+  </div>
+
+  <script>
+    const messages = [
+      "You are beautiful, but your heart is more beautiful still.",
+      "I look at you, and I see all the stars I ever wished upon.",
+      "If you come at four in the afternoon, I’ll begin to be happy by three.",
+      "You become responsible, forever, for what you have tamed."
+    ];
+    function reveal(index) {
+      document.getElementById("message").innerText = messages[index];
+    }
+
+    // Starfall background
+    for (let i = 0; i < 60; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.animationDuration = 4 + Math.random() * 4 + "s";
+      document.body.appendChild(star);
+    }
+  </script>
+</body>
+</html>
