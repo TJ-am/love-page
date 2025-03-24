@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>You + I</title>
+  <title>You + I | Tina Jia</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -111,7 +111,8 @@
   </style>
 </head>
 <body>
-  <audio id="loveSong" autoplay loop>
+  <div id="audioTrigger" style="text-align:center;padding:20px;font-size:1.2em;cursor:pointer;">🔊 Click to Play Tina's Song</div>
+  <audio id="loveSong" loop>
     <source src="love_audio.wav" type="audio/wav" />
   </audio>
 
@@ -152,15 +153,14 @@ Call(me, by=your_name)
   </div>
 
   <div class="gallery">
-    <!-- Replace with real image links -->
-    <img src="https://via.placeholder.com/300" alt="photo1">
-    <img src="https://via.placeholder.com/300" alt="photo2">
-    <img src="https://via.placeholder.com/300" alt="photo3">
+    <img src="your_photo1.jpg" alt="photo1">
+    <img src="your_photo2.jpg" alt="photo2">
+    <img src="your_photo3.jpg" alt="photo3">
   </div>
 
   <div class="diary">
-    <h2>💌 My Diary for You</h2>
-    <textarea placeholder="Write your heart here..."></textarea>
+    <h2>💌 My Diary for Tina Jia</h2>
+    <textarea id="diaryText" placeholder="Write your heart here..."></textarea>
   </div>
 
   <script>
@@ -188,6 +188,21 @@ Call(me, by=your_name)
       star.style.animationDuration = 3 + Math.random() * 5 + "s";
       document.body.appendChild(star);
     }
+
+    // Music autoplay after user interaction
+    const audio = document.getElementById("loveSong");
+    const trigger = document.getElementById("audioTrigger");
+    trigger.addEventListener("click", () => {
+      audio.play();
+      trigger.style.display = "none";
+    });
+
+    // Diary local save
+    const diary = document.getElementById("diaryText");
+    diary.value = localStorage.getItem("tinaDiary") || "";
+    diary.addEventListener("input", () => {
+      localStorage.setItem("tinaDiary", diary.value);
+    });
   </script>
 </body>
 </html>
